@@ -1,0 +1,26 @@
+@startuml
+
+actor "Оператор" as operator
+participant "MES Frontend" as mes_front
+participant "MES Backend" as mes_back
+database "Redis DB" as redis_db
+database "MES DB" as mes_db
+
+==Запись об изменении статуса заказа. Write through ==
+activate operator
+operator -> mes_front++: Внесение статуса заказа
+mes_front -> mes_back++: PUT /orders/{order_id}
+mes_back -> redis_db++: Проксирование данных без записи
+redis_db -> mes_db++: Обновление статуса в БД по order_id 
+
+alt Обновление статуса прошло успешно
+    mes_db -> redis_db: Сохраняем данные в кеш
+    redis_db -> mes_back--: Передача кеша\обновленных данных в бекенд
+else Обновление статуса не прошло успешно
+    mes_db -> mes_back--: Ошибка
+end
+
+mes_back -> mes_front--: результат запроса
+mes_front -> operator--
+
+@enduml
