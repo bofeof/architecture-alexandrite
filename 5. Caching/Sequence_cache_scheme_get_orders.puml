@@ -16,13 +16,14 @@ mes_back -> redis_db++: Проверка кеша по заказам
 
 alt Проверка кеша. Кеш найден
     redis_db -> mes_back: Передача кеша
-    mes_back -> mes_front--: Отображение заказов на клиенте
+    mes_back -> mes_front: Отображение заказов на клиенте
 else Проверка кеша. Кеш не найден
     redis_db -> mes_back: Кеш не найден
     mes_back -> mes_db++: Кеш не найден, запрос к БД
     mes_db -> mes_back--: Данные по заказам
     mes_back -> mes_front: Отправка данных по заказу клиенту
-    mes_back -> redis_db: Запись актуальных данных в кеш
+    mes_back -> redis_db--: Запись актуальных данных в кеш
+    redis_db--
 end
 
 mes_front -> operator: Передача данных о заказах оператору

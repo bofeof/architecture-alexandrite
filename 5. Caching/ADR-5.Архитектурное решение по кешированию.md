@@ -65,7 +65,7 @@
 ### Sequence-диаграммы работы MES с кешем.
 Две схемы на паттерны Read aside и Write through. На схемах показано как проходит операция чтения списка заказов и запись об изменении статуса заказа. 
 * [Чтение заказов](Sequence_cache_scheme_get_orders.puml)
-![Чтение заказов](../out/task%205/Sequence_cache_scheme_get_orders/Sequence_cache_scheme_get_orders.svg)
+![Чтение заказов](../out/5.%20Caching/Sequence_cache_scheme_get_orders/Sequence_cache_scheme_get_orders.svg)
 
 * [Изменить статус заказа](./Sequence_cache_scheme_change_status.puml)
-![Изменить статус заказа](../out/task%205/Sequence_cache_scheme_change_status/Sequence_cache_scheme_change_status.svg)
+![Изменить статус заказа](../out/5.%20Caching/Sequence_cache_scheme_change_status/Sequence_cache_scheme_change_status.svg)
