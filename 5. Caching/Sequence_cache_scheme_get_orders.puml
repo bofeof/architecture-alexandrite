@@ -1,0 +1,31 @@
+@startuml
+
+actor "Оператор" as operator
+participant "MES Frontend" as mes_front
+participant "MES Backend" as mes_back
+database "Redis DB" as redis_db
+database "MES DB" as mes_db
+
+
+==Операция чтения списка заказов. Read Aside кеширование==
+
+activate operator
+operator -> mes_front++: Запрос данных о заказе со стороны UI
+mes_front -> mes_back++: GET /orders
+mes_back -> redis_db++: Проверка кеша по заказам
+
+alt Проверка кеша. Кеш найден
+    redis_db -> mes_back: Передача кеша
+    mes_back -> mes_front: Отображение заказов на клиенте
+else Проверка кеша. Кеш не найден
+    redis_db -> mes_back: Кеш не найден
+    mes_back -> mes_db++: Кеш не найден, запрос к БД
+    mes_db -> mes_back--: Данные по заказам
+    mes_back -> mes_front: Отправка данных по заказу клиенту
+    mes_back -> redis_db--: Запись актуальных данных в кеш
+    redis_db--
+end
+
+mes_front -> operator: Передача данных о заказах оператору
+
+@enduml
