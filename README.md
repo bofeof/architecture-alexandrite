@@ -9,3 +9,11 @@
 - [ADR-3. Архитектурное решение по трейсингу](./3.%20Tracing/ADR-3.%20Архитектурное%20решение%20по%20трейсингу.md)
 - [ADR-4. Архитектурное решение по логированию](./4.%20Logging/ADR-4.%20Архитектурное%20решение%20по%20логированию.md)
 - [ADR-5. Архитектурное решение по кешированию](/5.%20Caching/ADR-5.Архитектурное%20решение%20по%20кешированию.md)
+
+
+#### Общее архитектурное решение:
+![Мониторинг, трейсинг и логирование](./4.%20Logging/jewerly_c4_model.drawio.svg)
+
+#### Кеширование (примеры)
+![Чтение заказа](./out/5.%20Caching/Sequence_cache_scheme_change_status/Sequence_cache_scheme_change_status.svg)
+![Изменение статуса заказа](./out/5.%20Caching/Sequence_cache_scheme_get_orders/Sequence_cache_scheme_get_orders.svg)
